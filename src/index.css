@@ -1,0 +1,45 @@
+@import "tailwindcss";
+
+@layer base {
+  body {
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Outfit', 'Plus Jakarta Sans', sans-serif;
+  }
+
+  code, pre, .font-mono {
+    font-family: 'JetBrains Mono', monospace;
+  }
+}
+
+.brand-green {
+  color: #2FAE60;
+}
+
+.bg-brand-green {
+  background-color: #2FAE60;
+}
+
+.border-brand-green {
+  border-color: #2FAE60;
+}
+
+/* Custom subtle glass and shadow effects */
+.shadow-soft {
+  box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.05), 0 4px 12px -2px rgba(0, 0, 0, 0.03);
+}
+
+.shadow-glow-emerald {
+  box-shadow: 0 0 25px -5px rgba(47, 174, 96, 0.3);
+}
+
+.shadow-card-hover {
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.shadow-card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px -15px rgba(47, 174, 96, 0.12), 0 8px 16px -4px rgba(0, 0, 0, 0.04);
+}
+

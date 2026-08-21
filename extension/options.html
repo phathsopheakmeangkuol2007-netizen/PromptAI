@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>PromptAI Settings</title>
+  <style>
+    body {
+      width: 340px;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #111827;
+      color: #f3f4f6;
+      padding: 16px;
+    }
+    h1 { font-size: 15px; margin: 0 0 4px; }
+    p.sub { font-size: 12px; color: #9ca3af; margin: 0 0 14px; }
+    label { display: block; font-size: 12px; color: #d1d5db; margin-bottom: 4px; }
+    input[type="password"],
+    input[type="text"],
+    select {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 8px;
+      border-radius: 6px;
+      border: 1px solid #374151;
+      background: #1f2937;
+      color: #f3f4f6;
+      font-size: 13px;
+      margin-bottom: 12px;
+    }
+    .provider-tabs {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 14px;
+    }
+    .provider-tab {
+      flex: 1;
+      text-align: center;
+      padding: 7px 2px;
+      border-radius: 6px;
+      border: 1px solid #374151;
+      background: #1f2937;
+      color: #9ca3af;
+      font-size: 10.5px;
+      cursor: pointer;
+      user-select: none;
+    }
+    .provider-tab.active {
+      border-color: #22c55e;
+      color: #22c55e;
+      background: #14251b;
+    }
+    .provider-panel { display: none; }
+    .provider-panel.active { display: block; }
+    button {
+      width: 100%;
+      padding: 9px;
+      border: none;
+      border-radius: 6px;
+      background: #22c55e;
+      color: #052e16;
+      font-weight: 600;
+      cursor: pointer;
+      font-size: 13px;
+    }
+    button:hover { background: #16a34a; }
+    #status { margin-top: 10px; font-size: 12px; min-height: 14px; }
+    .ok { color: #4ade80; }
+    .err { color: #f87171; }
+    a { color: #60a5fa; }
+  </style>
+</head>
+<body>
+  <h1>PromptAI · API Settings</h1>
+  <p class="sub">
+    Pick which AI grades your prompts. Keys are stored only in this browser's
+    local extension storage and sent directly to that provider — never anywhere else.
+  </p>
+  <p id="currentMode" class="sub" style="color:#4ade80; font-weight:600;">Currently active: Local (no key)</p>
+
+  <div class="provider-tabs">
+    <div class="provider-tab" data-provider="local">Local (no key)</div>
+    <div class="provider-tab" data-provider="gemini">Gemini</div>
+    <div class="provider-tab" data-provider="openai">OpenAI</div>
+    <div class="provider-tab" data-provider="anthropic">Claude</div>
+    <div class="provider-tab" data-provider="openrouter">OpenRouter</div>
+  </div>
+
+  <div class="provider-panel" data-panel="local">
+    <p class="sub" style="margin-top:0;">
+      Grades your prompt instantly, on-device, with no API key and no internet
+      request at all. It scores 5 foundations - Role, Task, Context, Format,
+      and Constraints/Examples - each out of 2 points, summed to a total out
+      of 10. It won't be as sharp as an AI judging it, but it's free, private,
+      and works immediately.
+    </p>
+  </div>
+
+  <div class="provider-panel" data-panel="gemini">
+    <label for="geminiApiKey">Gemini API key</label>
+    <input type="password" id="geminiApiKey" placeholder="AQ... or AIza..." autocomplete="off" />
+    <label for="geminiModel">Model</label>
+    <select id="geminiModel">
+      <option value="gemini-3.6-flash">gemini-3.6-flash (fast, default)</option>
+      <option value="gemini-3.5-flash-lite">gemini-3.5-flash-lite (fastest, lowest cost)</option>
+      <option value="gemini-3.1-pro">gemini-3.1-pro (higher quality, slower)</option>
+    </select>
+    <p class="sub">Get a key: <a href="https://aistudio.google.com/apikey" target="_blank">aistudio.google.com/apikey</a></p>
+  </div>
+
+  <div class="provider-panel" data-panel="openai">
+    <label for="openaiApiKey">OpenAI API key</label>
+    <input type="password" id="openaiApiKey" placeholder="sk-..." autocomplete="off" />
+    <label for="openaiModel">Model</label>
+    <select id="openaiModel">
+      <option value="gpt-5-mini">gpt-5-mini (fast, default)</option>
+      <option value="gpt-5">gpt-5 (higher quality, slower)</option>
+      <option value="gpt-5-nano">gpt-5-nano (fastest, lowest cost)</option>
+    </select>
+    <p class="sub">Get a key: <a href="https://platform.openai.com/api-keys" target="_blank">platform.openai.com/api-keys</a></p>
+  </div>
+
+  <div class="provider-panel" data-panel="anthropic">
+    <label for="anthropicApiKey">Anthropic (Claude) API key</label>
+    <input type="password" id="anthropicApiKey" placeholder="sk-ant-..." autocomplete="off" />
+    <label for="anthropicModel">Model</label>
+    <select id="anthropicModel">
+      <option value="claude-haiku-4-5-20251001">Claude Haiku 4.5 (fast, default)</option>
+      <option value="claude-sonnet-5">Claude Sonnet 5 (higher quality)</option>
+    </select>
+    <p class="sub">Get a key: <a href="https://console.anthropic.com/settings/keys" target="_blank">console.anthropic.com/settings/keys</a></p>
+  </div>
+
+  <div class="provider-panel" data-panel="openrouter">
+    <label for="openrouterApiKey">OpenRouter API key</label>
+    <input type="password" id="openrouterApiKey" placeholder="sk-or-v1-..." autocomplete="off" />
+    <label for="openrouterModel">Model (OpenRouter model slug)</label>
+    <input type="text" id="openrouterModel" placeholder="openai/gpt-5-mini" autocomplete="off" />
+    <p class="sub">
+      OpenRouter gives you one key for many models (OpenAI, Claude, Gemini, Llama, etc).
+      Browse exact model slugs at
+      <a href="https://openrouter.ai/models" target="_blank">openrouter.ai/models</a>
+      and paste one in, e.g. <code>anthropic/claude-haiku-4.5</code> or a free model
+      like <code>meta-llama/llama-3.1-8b-instruct:free</code>.
+    </p>
+    <p class="sub">Get a key: <a href="https://openrouter.ai/keys" target="_blank">openrouter.ai/keys</a></p>
+  </div>
+
+  <button id="save">Save</button>
+  <div id="status"></div>
+
+  <script src="options.js"></script>
+</body>
+</html>
