@@ -42,6 +42,13 @@ Connect your own OpenAI, Anthropic, or Gemini API key to enable prompt auto-corr
   - Claude Sonnet 5
   - Gemini 3.6 Flash
   - Free Claude Code
+  - Git
+
+---
+## Hosting and Deployment
+
+- Github
+- Render
 
 ---
 
