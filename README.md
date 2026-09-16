@@ -88,3 +88,9 @@ This project is under active development as part of an independent build (origin
 ---
 
 Built by Group A-13 from theme AI for Education - Innovation Challenge 2026
+
+---
+```
+PromptAI has been suspended. So, website https://promptai-t7ut.onrender.com is no longer be accessible."
+```
+---
